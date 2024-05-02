@@ -1,5 +1,9 @@
-import fetch from 'node-fetch';
-import fs from 'fs';
+// import fetch from 'node-fetch';
+// import fs from 'fs';
+const fs = require('fs');
+// const { MonogClient } = require('mongodb');
+// const uri = 'mongodb://localhost:27017';
+// const db_name = 'code_tl_musicbrainz';
 const API = "https://musicbrainz.org/ws/2/";
 
 async function get_artist(artist_name) {
@@ -34,6 +38,24 @@ async function make_csv(data) {
   });
 }
 
+// async function mongo(data) {
+//   try {
+//     await client.connect();
+//     console.log("Connected to MongoDB server.");
+
+//     const db = client.db(db_name);
+
+//     await db.createCollection('Artists');
+//     console.log('Artists has been created');
+
+//     const collection = db.collection('Artists');
+//     const result = await collection.insert(data);
+//   } finally {
+//     await client.close();
+//     console.log("MongoDB connection was closed.");
+//   }
+// }
+
 async function main() {
   const artist_name = process.argv[2];
 
@@ -47,6 +69,7 @@ async function main() {
   console.log(album_data);
 
   make_csv(album_data);
+  // mongo(album_data);
 }
 
 main();
